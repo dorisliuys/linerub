@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <center>
+  {% for s in story %}
+    <div class="nextObject">
+      <p class="published">{{s.title}}</p><br>
+      <p class="publisher">{{s.paragraph}}</p>
+    </div>
+  {% endfor %}
+  </center>
+</div>
+
+{% endblock %}
+
+{% block extra-js %}
+
+  <script>
+
+  var colors = ["3a5795", "279a29", "783a95", "dd3b38"]
+  var randomColor = Math.floor(Math.random()*colors.length);
+
+  $(".nextObject").each(function() {
+    $(this).css("border-color", "#" + colors[randomColor]);
+    $(this).css("color", "#" + colors[randomColor]);
+    randomColor = (randomColor + 1) % colors.length;
+  });
+
+  </script>
+
+{% endblock %}

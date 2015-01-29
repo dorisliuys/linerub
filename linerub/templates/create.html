@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <center>
+    <form method="POST" action="/submit/" id="formid">
+      <input id="inputBox" type="text" name="title" style="height:32px;" placeholder="Give your story an inspiring title" required></input>
+      <textarea id="textbox" type="text" name="paragraph" placeholder="Now write, damn it!" required></textarea>
+      <button class="btn btn-large bottoms" name="submit" type="submit">Move to step two!</button>
+    </form>
+  </center>
+</div>
+
+{% endblock %}
+
+{% block extra-js %}
+{% endblock %}

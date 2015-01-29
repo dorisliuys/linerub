@@ -1,0 +1,640 @@
+/* --- Home --- */
+
+.createStory {
+  color: #3a5795;
+  width: 500px;
+  font-weight: 200;
+  font-size: 30px;
+  border: 1px solid #3a5795;
+  padding: 30px;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+.viewStormy {
+  color: #279a29;
+  width: 500px;
+  font-weight: 200;
+  font-size: 30px;
+  border: 1px solid #279a29;
+  padding: 30px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+  .viewStormy:hover {
+    background: #279a29;
+    color: white;
+    border: 1px solid #279a29;
+  }
+
+.viewStory {
+  color: #783a95;
+  width: 500px;
+  font-weight: 200;
+  font-size: 30px;
+  border: 1px solid #783a95;
+  padding: 30px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+  .viewStory:hover {
+    background: #783a95;
+    color: white;
+    border: 1px solid #783a95;
+  }
+
+.logout {
+  color: #dd3b38;
+  width: 500px;
+  font-weight: 200;
+  font-size: 30px;
+  border: 1px solid #dd3b38;
+  padding: 30px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+  .logout:hover {
+    background: #dd3b38;
+    color: white;
+    border: 1px solid #dd3b38;
+  }
+
+#textbox {
+  padding-left: 19px;
+  padding-right: 19px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 960px;
+  max-width: 960px;
+  height: 325px;
+  max-height: 500px;
+}
+
+.bottoms {
+  margin-bottom: 50px;
+}
+
+#formout {
+  margin-bottom: 0;
+}
+
+#inputBox {
+  padding-left: 19px;
+  padding-right: 19px;
+  width: 960px;
+  max-width: 960px;
+}
+
+#highlights {
+  padding-left: 19px;
+  padding-right: 19px;
+  width: 960px;
+  max-width: 960px;
+}
+
+#step2 {
+  opacity: 0;
+  width: 400px;
+  color: #3a5795;
+  border: 1px solid #3a5795;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.awesome {
+  font-size: 14px;
+  float: left;
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+.published {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.publisher {
+  text-align: left;
+  font-size: 14px;
+}
+
+.pub {
+  text-align: right;
+  font-size: 14px;
+}
+
+.linkme {
+  border: 1px solid black;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 4px;
+}
+
+.nextObject {
+  border: 1px solid #3a5795;
+  background: white;
+  color: #3a5795;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  overflow: auto;
+}
+
+.nextObjectW {
+  border: 1px solid #3a5795;
+  background: white;
+  color: #3a5795;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-right: 16px;
+  padding-left: 16px;
+  overflow: auto;
+}
+
+/* --- Registration, Login, and Animation --- */
+
+#bubble {
+  position: fixed;
+  background-color: white;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  -ms-transform: rotate(315deg);
+  -webkit-transform: rotate(315deg);
+  transform: rotate(315deg);
+  text-align: center;
+  width: 180px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  font-size: 40px;
+  border: 1px solid black;
+  font-weight: 200;
+  opacity: 0;
+}
+
+.bubbleBox {
+  position: absolute;
+  left: 720px;
+  bottom: 280px;
+}
+
+.footer {
+  position: fixed;
+  background: white;
+  color: black;
+  z-index: 1000;
+  width: 1000px;
+  bottom: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 13px;
+  font-weight: 200;
+}
+
+#hideRightFlow {
+  position: absolute;
+  background: white;
+  z-index: 1000;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+}
+
+#hideLeftFlow {
+  position: absolute;
+  background: white;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+}
+
+#bird {
+  width: 42px;
+  height: auto;
+  max-width: 42px;
+  position: fixed;
+}
+
+#crazyBird {
+  width: 42px;
+  height: auto;
+  max-width: 42px;
+  position: fixed;
+}
+
+#error {
+  text-align: center;
+  position: fixed;
+  width: 400px;
+  opacity: 0;
+  border: 1px solid #dd3b38;
+  padding: 15px;
+  border-radius: 4px;
+  font-size: 17px;
+  font-weight: 200;
+  color: #dd3b38;
+}
+
+#explosion {
+  position: fixed;
+  opacity: 0;
+}
+
+.errorLogBox {
+  left: 425px;
+  bottom: 155px;
+  position: absolute;
+}
+
+.errorRegBox {
+  left: 425px;
+  bottom: 155px;
+  position: absolute;
+}
+
+#tree {
+  width: 35px;
+  height: 50px;
+  padding-left: 15px;
+  font-size: 14px;
+  line-height: 24px;
+  position: fixed;
+  color: #FFFFFF;
+}
+
+#tree1 {
+  width: 40px;
+  height: 55px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#tree2 {
+  width: 30px;
+  height: 45px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#tree3 {
+  width: 40px;
+  height: 55px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#tree4 {
+  width: 30px;
+  height: 45px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#tree5 {
+  width: 40px;
+  height: 55px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#tree6 {
+  width: 30px;
+  height: 45px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#tree7 {
+  width: 40px;
+  height: 55px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#tree8 {
+  width: 30px;
+  height: 45px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#tree9 {
+  width: 40px;
+  height: 55px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#tree10 {
+  width: 30px;
+  height: 45px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#tree11 {
+  width: 40px;
+  height: 55px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#tree12 {
+  width: 30px;
+  height: 45px;
+  padding-left: 15px;
+  line-height: 24px;
+  position: fixed;
+}
+
+#fire {
+  width: 17px;
+  height: auto;
+  opacity: 0;
+  position: relative;
+}
+
+#smoke1 {
+  opacity: 0;
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#smoke2 {
+  opacity: 0;
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#smoke3 {
+  opacity: 0;
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#frantic1 {
+  opacity: 0;
+  -ms-transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+#frantic2 {
+  opacity: 0;
+}
+
+#frantic3 {
+  opacity: 0;
+  -ms-transform: rotate(225deg);
+  -webkit-transform: rotate(225deg);
+  transform: rotate(225deg);
+}
+
+#frantic4 {
+  opacity: 0;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#frantic5 {
+  opacity: 0;
+}
+
+#frantic6 {
+  opacity: 0;
+  -ms-transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+.birdBox {
+  position: absolute;
+  top: 100px;
+  overflow-x: hidden;
+}
+
+.explosionBox {
+  position: absolute;
+  bottom: 220px;
+  left: 577px;
+}
+
+.crazyBirdBox {
+  position: absolute;
+  top: 100px;
+  overflow-x: hidden;
+}
+
+.treeBox {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.treeBox1 {
+  position: absolute;
+  left: 330px;
+  top: 506px;
+}
+
+.treeBox2 {
+  position: absolute;
+  left: 380px;
+  top: 506px;
+}
+
+.treeBox3 {
+  position: absolute;
+  left: 430px;
+  top: 506px;
+}
+
+.treeBox4 {
+  position: absolute;
+  left: 480px;
+  top: 506px;
+}
+
+.treeBox5 {
+  position: absolute;
+  left: 530px;
+  top: 506px;
+}
+
+.treeBox6 {
+  position: absolute;
+  left: 580px;
+  top: 506px;
+}
+
+.treeBox7 {
+  position: absolute;
+  left: 630px;
+  top: 506px;
+}
+
+.treeBox8 {
+  position: absolute;
+  left: 680px;
+  top: 506px;
+}
+
+.treeBox9 {
+  position: absolute;
+  left: 730px;
+  top: 506px;
+}
+
+.treeBox10 {
+  position: absolute;
+  left: 780px;
+  top: 506px;
+}
+
+.treeBox11 {
+  position: absolute;
+  left: 830px;
+  top: 506px;
+}
+
+.treeBox12 {
+  position: absolute;
+  left: 880px;
+  top: 506px;
+}
+
+.fireBox {
+  position: absolute;
+  left: 727px;
+  top: 540px;
+}
+
+.smokeBox1 {
+  position: absolute;
+  left: 730px;
+  top: 510px;
+}
+
+.smokeBox2 {
+  position: absolute;
+  left: 737px;
+  top: 500px;
+}
+
+.smokeBox3 {
+  position: absolute;
+  left: 730px;
+  top: 490px;
+}
+
+.franticBox1 {
+  position: absolute;
+  left: 800px;
+  top: 90px;
+}
+
+.franticBox2 {
+  position: absolute;
+  left: 820px;
+  top: 85px;
+}
+
+.franticBox3 {
+  position: absolute;
+  left: 840px;
+  top: 90px;
+}
+
+.franticBox4 {
+  position: absolute;
+  left: 800px;
+  top: 130px;
+}
+
+.franticBox5 {
+  position: absolute;
+  left: 820px;
+  top: 135px;
+}
+
+.franticBox6 {
+  position: absolute;
+  left: 845px;
+  top: 135px;
+}
+
+.preview2 {
+  padding-top: 20px;
+}
+
+#hideReg {
+  display: none;
+}
+
+#hideLog {
+  display: block;
+}
+
+.loginBox {
+  width: 250px;
+  margin-bottom: 60px;
+  padding-top: 40px;
+}
+
+.logSize {
+  text-align: left;
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 0px;
+  padding-left: 15px;
+  font-size: 20px;
+  font-weight: 200;
+  color: black;
+  text-shadow: 0 1px 0 #ffffff;
+}
+
+.regSize {
+  cursor: pointer;
+  text-align: left;
+  display: block;
+  margin-left: 40px;
+  padding-top: 10px;
+  font-size: 18px;
+  font-weight: 200;
+  opacity: 0.7;
+  color: #3a5795;
+  text-shadow: 0 1px 0 #ffffff;
+}

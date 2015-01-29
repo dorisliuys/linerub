@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <center>
+  {% for s in story %}
+    <div class="altogether">
+      {% if s.publish == False %}
+      <p class="pub">not yet published! click <a class="linkme" href="/next/">here</a> to publish</p>
+      {% else %}
+      <p class="pub">published!</p>
+      {% endif %}
+      <div class="nextObject">
+        <p class="published">{{s.title}}</p><br>
+        <p class="publisher">{{s.paragraph}}</p>
+      </div>
+    </div>
+  {% endfor %}
+  </center>
+</div>
+
+{% endblock %}
+
+{% block extra-js %}
+
+  <script>
+  var colors = ["3a5795", "279a29", "783a95", "dd3b38"]
+  var randomColor = Math.floor(Math.random()*colors.length);
+
+  $(".altogether").each(function() {
+    $(this).find(".nextObject").css("border-color", "#" + colors[randomColor]);
+    $(this).find(".nextObject").css("color", "#" + colors[randomColor]);
+    $(this).find(".linkme").css("border-color", "#" + colors[randomColor]);
+    $(this).find(".linkme").css("color", "#" + colors[randomColor]);
+    randomColor = (randomColor + 1) % colors.length;
+  });
+  </script>
+
+{% endblock %}
