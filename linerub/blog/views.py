@@ -20,14 +20,14 @@ def home(request):
 
 
 def dashboard(request):
-    story = Share.objects.filter(publish = True)
+    story = Share.objects.filter(publish = True).order_by("-id")
     if not request.user.is_authenticated():
         return render_to_response("register.html")
     return render_to_response("dashboard.html", {"user": request.user, "story": story})
 
 
 def view(request):
-    story = Share.objects.filter(user = request.user)
+    story = Share.objects.filter(user = request.user).order_by("-id")
     if not request.user.is_authenticated():
         return render_to_response("register.html")
     return render_to_response("view.html", {"user": request.user, "story": story})
@@ -39,12 +39,35 @@ def create(request):
     return render_to_response("create.html", {"user": request.user})
 
 
+def profile(request, username):
+    story = Share.objects.filter(user__username=username, publish = True).order_by("-id")
+    if not request.user.is_authenticated():
+        return render_to_response("register.html")
+    return render_to_response("profile.html", {"user": request.user, "story": story})
+
+
 def highlight(request):
     if request.method == 'POST':
         form = HighlightForm(request.POST)
         if form.is_valid():
             high = form.cleaned_data['highlight']
             story = Share.objects.filter(user = request.user, publish = False).order_by('-pk')[0]
+            story.publish = True
+            light = Highlight.objects.create(user = request.user, highlights = high, story = story)
+            light.save()
+            story.save()
+            return HttpResponseRedirect('/dashboard/')
+    else:
+        form = HighlightForm()
+    return render_to_response("error.html", {"form": form})
+
+
+def highlightw(request, id):
+    if request.method == 'POST':
+        form = HighlightForm(request.POST)
+        if form.is_valid():
+            high = form.cleaned_data['highlight']
+            story = Share.objects.get(id = id)
             story.publish = True
             light = Highlight.objects.create(user = request.user, highlights = high, story = story)
             light.save()
@@ -86,6 +109,39 @@ def next(request):
         sortme = None
         sortme_large = None
     return render_to_response("step2.html", {"user": request.user, "title": sortme, "paragraph": sortme_large})
+
+
+def nextw(request, id):
+    heap = []
+    total = 0
+    heap_large = []
+    total_large = 0
+
+    if (Share.objects.filter(id = id, publish = False).count() > 0):
+        story = Share.objects.get(id = id)
+        cool = str(story.title)
+        cooler = str(story.paragraph)
+        trim = cool.split()
+        trimmer = cooler.split()
+
+        for w in trim:
+            total = total + 1
+            heapq.heappush(heap, (w, total))
+
+        for word in trimmer:
+            total_large = total_large + 1
+            heapq.heappush(heap_large, (word, total_large))
+    
+        sortme = sorted(heap, key=lambda x: x[1])
+
+        sortme_large = sorted(heap_large, key=lambda x: x[1])
+
+        if not request.user.is_authenticated():
+            return render_to_response("register.html")
+    else:
+        sortme = None
+        sortme_large = None
+    return render_to_response("step2_re.html", {"user": request.user, "title": sortme, "paragraph": sortme_large, "id": id})
 
 
 def submit(request):

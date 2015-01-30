@@ -15,9 +15,12 @@ urlpatterns = patterns('',
     url(r'^create/', 'blog.views.create', name='create'),
     url(r'^dashboard/', 'blog.views.dashboard', name='dashboard'),
     url(r'^next/', 'blog.views.next', name='next'),
+    url(r'^nextw/(?P<id>[\w\-]+)/$', 'blog.views.nextw', name='nextw'),
     url(r'^view/', 'blog.views.view', name='view'),
     url(r'^submit/', 'blog.views.submit', name='submit'),
     url(r'^highlight/', 'blog.views.highlight', name='highlight'),
+    url(r'^highlightw/(?P<id>[\w\-]+)/$', 'blog.views.highlightw', name='highlightw'),
+    url(r'^profile/(?P<username>[\w\-]+)/$', 'blog.views.profile', name='profile'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

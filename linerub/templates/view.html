@@ -9,11 +9,16 @@
   <center>
   {% for s in story %}
     <div class="altogether">
+      <div class="row">
+        <div class="span3">
+          <p class="pubdate">{{s.date}}</p>
+        </div>
       {% if s.publish == False %}
-      <p class="pub">not yet published! click <a class="linkme" href="/next/">here</a> to publish</p>
+      <p class="pub">not yet published! click <a class="linkme" href="/nextw/{{s.id}}">here</a> to publish</p>
       {% else %}
       <p class="pub">published!</p>
       {% endif %}
+      </div>
       <div class="nextObject">
         <p class="published">{{s.title}}</p><br>
         <p class="publisher">{{s.paragraph}}</p>

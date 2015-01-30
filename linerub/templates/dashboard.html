@@ -8,9 +8,12 @@
 <div class="container">
   <center>
   {% for s in story %}
-    <div class="nextObject">
-      <p class="published">{{s.title}}</p><br>
-      <p class="publisher">{{s.paragraph}}</p>
+    <div class="altogether">
+      <p class="pubdate">{{s.date}}, by <a class="linkme" href="/profile/{{s.user.username}}">{{s.user.username}}</a></p>
+      <div class="nextObject">
+        <p class="published">{{s.title}}</p><br>
+        <p class="publisher">{{s.paragraph}}</p>
+      </div>
     </div>
   {% endfor %}
   </center>
@@ -25,9 +28,11 @@
   var colors = ["3a5795", "279a29", "783a95", "dd3b38"]
   var randomColor = Math.floor(Math.random()*colors.length);
 
-  $(".nextObject").each(function() {
-    $(this).css("border-color", "#" + colors[randomColor]);
-    $(this).css("color", "#" + colors[randomColor]);
+  $(".altogether").each(function() {
+    $(this).find(".nextObject").css("border-color", "#" + colors[randomColor]);
+    $(this).find(".nextObject").css("color", "#" + colors[randomColor]);
+    $(this).find(".linkme").css("border-color", "#" + colors[randomColor]);
+    $(this).find(".linkme").css("color", "#" + colors[randomColor]);
     randomColor = (randomColor + 1) % colors.length;
   });
 
