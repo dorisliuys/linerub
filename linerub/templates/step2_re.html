@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <center>
+    <form method="POST" action="/highlightw/{{id}}/" id="formout">
+      <input type="text" id="highlights" name="highlight" style="height:32px;" placeholder="Click on words to add them here!" required></input>
+    </form>
+  </center>
+  <div class="nextObjectW">
+    {% for w, i in title %}
+      <p id="awesome{{i}}" class="awesome">{{w}}</p>
+    {% endfor %}
+    <br>
+    <br>
+    {% for word, index in paragraph %}
+    <p id="awesomer{{index}}" class="awesome">{{word}}</p>
+    {% endfor %}
+  </div>
+  <center><button class="btn btn-large bottoms" name="submit" type="submit" form="formout">Publish</button></center></center>
+</div>
+
+{% endblock %}
+
+{% block extra-js %}
+
+<script>
+
+  {% for w, i in title %}
+
+    $("#awesome{{i}}").click(function() {
+        $(this).css("color", "#dd3b38");
+        var value = $(this).text();
+        var input = $("#highlights");
+        input.val(input.val() + value + '  ');
+        return false;
+    });
+
+  {% endfor %}
+
+  {% for word, index in paragraph %}
+
+    $("#awesomer{{index}}").click(function() {
+        $(this).css("color", "#dd3b38");
+        var value = $(this).text();
+        var input = $("#highlights");
+        input.val(input.val() + value + '  ');
+        return false;
+    });
+
+  {% endfor %}
+
+</script>
+
+{% endblock %}
