@@ -20,5 +20,9 @@ class SubmitForm(forms.Form):
 
 class HighlightForm(forms.Form):
     highlight = forms.CharField(max_length=1000)
+    tag = forms.CharField(max_length=1000)
+
+class TagForm(forms.Form):
+    image = forms.ImageField()
 
 

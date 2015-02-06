@@ -1054,7 +1054,7 @@ button,
 select,
 textarea {
   font-size: 14px;
-  font-weight: normal;
+  font-weight: 200;
   line-height: 20px;
 }
 
@@ -3195,7 +3195,7 @@ button.close {
   line-height: 20px;
   color: #3a5795;
   font-weight: 200;
-  opacity: 0.9;
+  opacity: 1;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
@@ -3223,7 +3223,7 @@ button.close {
 .btn.active,
 .btn.disabled,
 .btn[disabled] {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .btn:active,
@@ -3237,9 +3237,8 @@ button.close {
 
 .btn:hover,
 .btn:focus {
-  color: white;
   border: 1px solid #3a5795;
-  background: #3a5795;
+  background: #EAEDF4;
   text-decoration: none;
   background-position: 0 -15px;
   -webkit-transition: background-position 0.1s linear;

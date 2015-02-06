@@ -1,5 +1,34 @@
 /* --- Home --- */
 
+.bluest {
+  background: #EAEDF4;
+}
+
+.greenist {
+  background: #E9F4E9;
+}
+
+.purpleist {
+  background: #F1EAF4;
+}
+
+.reddist {
+  background: #FBEBEA;
+}
+
+.lightup {
+  background: black;
+  color: white;
+}
+
+.photo {
+  height: 50px;
+  width: auto;
+  margin-left: 2px;
+  opacity: 0.5;
+  border: 1px solid black;
+}
+
 .createStory {
   color: #3a5795;
   width: 500px;
@@ -12,6 +41,12 @@
   margin-bottom: 5px;
   border-radius: 4px;
 }
+
+  .createStory:hover {
+    background: #EAEDF4;
+    border: 1px solid #3a5795;
+    color: #3a5795;
+  }
 
 .viewStormy {
   color: #279a29;
@@ -26,9 +61,9 @@
 }
 
   .viewStormy:hover {
-    background: #279a29;
-    color: white;
+    background: #E9F4E9;
     border: 1px solid #279a29;
+    color: #279a29;
   }
 
 .viewStory {
@@ -44,8 +79,8 @@
 }
 
   .viewStory:hover {
-    background: #783a95;
-    color: white;
+    background: #F1EAF4;
+    color: #783a95;
     border: 1px solid #783a95;
   }
 
@@ -62,8 +97,8 @@
 }
 
   .logout:hover {
-    background: #dd3b38;
-    color: white;
+    background: #FBEBEA;
+    color: #dd3b38;
     border: 1px solid #dd3b38;
   }
 
@@ -100,6 +135,13 @@
   max-width: 960px;
 }
 
+#tags {
+  padding-left: 19px;
+  padding-right: 19px;
+  width: 960px;
+  max-width: 960px;
+}
+
 #step2 {
   opacity: 0;
   width: 400px;
@@ -111,9 +153,21 @@
 
 .awesome {
   font-size: 14px;
-  float: left;
-  margin-left: 4px;
+  display: inline-block;
   cursor: pointer;
+}
+
+.format {
+  font-size: 14px;
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.formats {
+  font-size: 14px;
+  display: inline-block;
+  margin-bottom: 0;
+  opacity: 1;
 }
 
 .published {
@@ -134,16 +188,37 @@
 .pubdate {
   text-align: left;
   font-size: 14px;
+  color: black;
+  margin-bottom: 15px;
 }
 
 .linkme {
   border: 1px solid black;
   padding-top: 4px;
   padding-bottom: 4px;
-  padding-left: 6px;
-  padding-right: 6px;
+  padding-left: 4px;
+  padding-right: 4px;
   border-radius: 4px;
+  cursor: pointer;
 }
+
+  .linkme:hover {
+    opacity: 1;
+  }
+
+.hoverpics {
+  background: white;
+  cursor: pointer;
+}
+
+.linkpics {
+  background: white;
+  cursor: pointer;
+}
+
+  .linkpics:hover {
+    text-decoration: underline;
+  }
 
 .nextObject {
   border: 1px solid #3a5795;
@@ -163,12 +238,25 @@
   background: white;
   color: #3a5795;
   border-radius: 4px;
-  margin-bottom: 10px;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  padding-right: 16px;
-  padding-left: 16px;
+  margin-bottom: 40px;
   overflow: auto;
+  cursor: pointer;
+}
+
+.containme {
+  padding-top: 5px;
+  padding-bottom: 7px;
+  padding-left: 3px;
+  border-bottom: 1px solid black;
+  height: 50px;
+}
+
+.textpart {
+  padding: 20px;
+}
+
+.opashitty {
+  opacity: 0.2;
 }
 
 /* --- Registration, Login, and Animation --- */

@@ -8,20 +8,21 @@
 <div class="container">
   <center>
     <form method="POST" action="/highlight/" id="formout">
-      <input type="text" id="highlights" name="highlight" style="height:32px;" placeholder="Click on words to add them here!" required></input>
+      <input type="text" id="highlights" name="highlight" style="height:32px;" placeholder="Click on words you would like viewers to add images to!" required></input>
+      <input type="text" id="tags" name="tag" style="height:32px;" placeholder="Click on words twice to see related posts!" required></input>
     </form>
   </center>
-  <div class="nextObjectW">
+  <div class="nextObject">
+    <center style="margin-bottom:10px;">
     {% for w, i in title %}
       <p id="awesome{{i}}" class="awesome">{{w}}</p>
     {% endfor %}
-    <br>
-    <br>
+    </center>
     {% for word, index in paragraph %}
     <p id="awesomer{{index}}" class="awesome">{{word}}</p>
     {% endfor %}
   </div>
-  <center><button class="btn btn-large bottoms" name="submit" type="submit" form="formout">Publish</button></center></center>
+  <center><button class="btn btn-large bottoms" name="submit" type="submit" form="formout">Publish</button></center>
 </div>
 
 {% endblock %}
@@ -30,14 +31,41 @@
 
 <script>
 
+  $('#highlights').keydown(function() {
+    return false;
+  });
+
   {% for w, i in title %}
 
     $("#awesome{{i}}").click(function() {
-        $(this).css("color", "#dd3b38");
-        var value = $(this).text();
-        var input = $("#highlights");
-        input.val(input.val() + value + '  ');
-        return false;
+        if ($(this).css("color") == "rgb(221, 59, 56)") {
+            $(this).css("background", "#FBEBEA");
+            var value = $(this).text();
+
+            {% for a, b in title %}
+            if ($("#awesome{{b}}").text() == value) {
+                $("#awesome{{b}}").css("background", "#FBEBEA");
+            }
+            {% endfor %}
+
+            var input = $("#tags");
+            input.val(input.val() + value + '  ');
+            return false;
+        }
+        else {
+            $(this).css("color", "#dd3b38");
+            var value = $(this).text();
+
+            {% for a, b in title %}
+            if ($("#awesome{{b}}").text() == value) {
+                $("#awesome{{b}}").css("color", "#dd3b38");
+            }
+            {% endfor %}
+
+            var input = $("#highlights");
+            input.val(input.val() + value + '  ');
+            return false;
+        }
     });
 
   {% endfor %}
@@ -45,11 +73,36 @@
   {% for word, index in paragraph %}
 
     $("#awesomer{{index}}").click(function() {
-        $(this).css("color", "#dd3b38");
-        var value = $(this).text();
-        var input = $("#highlights");
-        input.val(input.val() + value + '  ');
-        return false;
+
+        if ($(this).css("color") == "rgb(221, 59, 56)") {
+
+            $(this).css("background", "#FBEBEA");
+            var value = $(this).text();
+
+            {% for c, d in paragraph %}
+                if ($("#awesomer{{d}}").text() == value) {
+                    $("#awesomer{{d}}").css("background", "#FBEBEA");
+                }
+            {% endfor %}
+
+            var input = $("#tags");
+            input.val(input.val() + value + '  ');
+            return false;
+        }
+        else {
+            $(this).css("color", "#dd3b38");
+            var value = $(this).text();
+
+            {% for c, d in paragraph %}
+                if ($("#awesomer{{d}}").text() == value) {
+                    $("#awesomer{{d}}").css("color", "#dd3b38");
+                }
+            {% endfor %}
+
+            var input = $("#highlights");
+            input.val(input.val() + value + '  ');
+            return false;
+        }
     });
 
   {% endfor %}

@@ -16,5 +16,12 @@ class Highlight(models.Model):
     story = models.ForeignKey(Share)
     user = models.ForeignKey(User)
     highlights = models.CharField(max_length=1000)
+    tags = models.CharField(max_length=1000)
+
+class Link(models.Model):
+    story = models.ForeignKey(Share)
+    links = models.CharField(max_length=20)
+    path = models.ImageField(upload_to='%Y/%m/%d', null=True)
+    id = models.AutoField('#', primary_key=True)
     
   

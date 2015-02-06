@@ -8,8 +8,8 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from blog.forms import UserForm, SubmitForm, HighlightForm
-from blog.models import Share, Highlight
+from blog.forms import UserForm, SubmitForm, HighlightForm, TagForm
+from blog.models import Share, Highlight, Link
 import heapq
 
 
@@ -19,18 +19,160 @@ def home(request):
     return render_to_response("home.html", {"user": request.user})
 
 
-def dashboard(request):
-    story = Share.objects.filter(publish = True).order_by("-id")
+def exchange(request):
+
+    array = []
+    array_large = []
+    total = 0
+    total_large = 0
+
+    story = Share.objects.filter(publish = True).order_by("?")[:1]
+    tags = Link.objects.all()
+
+    for s in story:
+
+        link = Link.objects.filter(story = s)
+
+        cool = str(s.title)
+        cooler = str(s.paragraph)
+        trim = cool.split()
+        trimmer = cooler.split()
+
+        for w in trim:
+            flag = False
+            for l in link:
+                if w == l.links:
+                    heapq.heappush(array, (l, total, s.id))
+                    flag = True
+            if (flag == False):
+                heapq.heappush(array, (w, total, s.id))
+            total = total + 1
+
+        for word in trimmer:
+            flag = False
+            for l in link:
+                if word == l.links:
+                    heapq.heappush(array_large, (l, total_large, s.id))
+                    flag = True
+            if (flag == False):
+                heapq.heappush(array_large, (word, total_large, s.id))
+            total_large = total_large + 1
+
+    sortme = sorted(array, key=lambda x: x[1])
+    sortme_large = sorted(array_large, key=lambda x: x[1])
+
     if not request.user.is_authenticated():
         return render_to_response("register.html")
-    return render_to_response("dashboard.html", {"user": request.user, "story": story})
+    return render_to_response("exchange.html", {"user": request.user, "snippet": sortme, "snippet_large": sortme_large, "story": story, "links": tags})
+
+
+def tag(request, id, word):
+    if request.method == 'POST':
+        form = TagForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.cleaned_data['image']
+            story = Share.objects.get(id = id)
+            links = Link.objects.get(story = story, links = word) 
+            links.path = image
+            links.save()
+            return HttpResponseRedirect('/dashboard/')
+    else:
+        form = TagForm()
+    return render_to_response("dashboard.html", {"form": form})
+    
+
+# Changes made
+def dashboard(request):
+
+    array = []
+    array_large = []
+    total = 0
+    total_large = 0
+
+    story = Share.objects.filter(publish = True).order_by("-id")
+    tags = Link.objects.all()
+
+    for s in story:
+
+        link = Link.objects.filter(story = s)
+
+        cool = str(s.title)
+        cooler = str(s.paragraph)
+        trim = cool.split()
+        trimmer = cooler.split()
+
+        for w in trim:
+            flag = False
+            for l in link:
+                if w == l.links:
+                    heapq.heappush(array, (l, total, s.id))
+                    flag = True
+            if (flag == False):
+                heapq.heappush(array, (w, total, s.id))
+            total = total + 1
+
+        for word in trimmer:
+            flag = False
+            for l in link:
+                if word == l.links:
+                    heapq.heappush(array_large, (l, total_large, s.id))
+                    flag = True
+            if (flag == False):
+                heapq.heappush(array_large, (word, total_large, s.id))
+            total_large = total_large + 1
+
+    sortme = sorted(array, key=lambda x: x[1])
+    sortme_large = sorted(array_large, key=lambda x: x[1])
+
+    if not request.user.is_authenticated():
+        return render_to_response("register.html")
+    return render_to_response("dashboard.html", {"user": request.user, "snippet": sortme, "snippet_large": sortme_large, "story": story, "links": tags})
 
 
 def view(request):
+    array = []
+    array_large = []
+    total = 0
+    total_large = 0
+
     story = Share.objects.filter(user = request.user).order_by("-id")
+    tags = Link.objects.all()
+
+    for s in story:
+
+        link = Link.objects.filter(story = s)
+
+        cool = str(s.title)
+        cooler = str(s.paragraph)
+        trim = cool.split()
+        trimmer = cooler.split()
+
+        for w in trim:
+            flag = False
+            for l in link:
+                if w == l.links:
+                    heapq.heappush(array, (l, total, s.id))
+                    flag = True
+            if (flag == False):
+                heapq.heappush(array, (w, total, s.id))
+            total = total + 1
+
+        for word in trimmer:
+            flag = False
+            for l in link:
+                if word == l.links:
+                    heapq.heappush(array_large, (l, total_large, s.id))
+                    flag = True
+            if (flag == False):
+                heapq.heappush(array_large, (word, total_large, s.id))
+            total_large = total_large + 1
+
+    sortme = sorted(array, key=lambda x: x[1])
+    sortme_large = sorted(array_large, key=lambda x: x[1])
+
     if not request.user.is_authenticated():
         return render_to_response("register.html")
-    return render_to_response("view.html", {"user": request.user, "story": story})
+    return render_to_response("view.html", {"user": request.user, "snippet": sortme, "snippet_large": sortme_large, "story": story, "links": tags})
 
 
 def create(request):
@@ -40,10 +182,50 @@ def create(request):
 
 
 def profile(request, username):
+
+    array = []
+    array_large = []
+    total = 0
+    total_large = 0
+
     story = Share.objects.filter(user__username=username, publish = True).order_by("-id")
+    tags = Link.objects.all()
+
+    for s in story:
+
+        link = Link.objects.filter(story = s)
+
+        cool = str(s.title)
+        cooler = str(s.paragraph)
+        trim = cool.split()
+        trimmer = cooler.split()
+
+        for w in trim:
+            flag = False
+            for l in link:
+                if w == l.links:
+                    heapq.heappush(array, (l, total, s.id))
+                    flag = True
+            if (flag == False):
+                heapq.heappush(array, (w, total, s.id))
+            total = total + 1
+
+        for word in trimmer:
+            flag = False
+            for l in link:
+                if word == l.links:
+                    heapq.heappush(array_large, (l, total_large, s.id))
+                    flag = True
+            if (flag == False):
+                heapq.heappush(array_large, (word, total_large, s.id))
+            total_large = total_large + 1
+
+    sortme = sorted(array, key=lambda x: x[1])
+    sortme_large = sorted(array_large, key=lambda x: x[1])
+
     if not request.user.is_authenticated():
         return render_to_response("register.html")
-    return render_to_response("profile.html", {"user": request.user, "story": story})
+    return render_to_response("profile.html", {"user": request.user, "snippet": sortme, "snippet_large": sortme_large, "story": story, "links": tags})
 
 
 def highlight(request):
@@ -51,11 +233,32 @@ def highlight(request):
         form = HighlightForm(request.POST)
         if form.is_valid():
             high = form.cleaned_data['highlight']
+            tag = form.cleaned_data['tag']
             story = Share.objects.filter(user = request.user, publish = False).order_by('-pk')[0]
             story.publish = True
-            light = Highlight.objects.create(user = request.user, highlights = high, story = story)
+            light = Highlight.objects.create(user = request.user, highlights = high, tags = tag, story = story)
             light.save()
             story.save()
+
+            cool = str(light.highlights)
+            cooler = str(story.paragraph)
+            coolest = str(story.title)
+            trim = cool.split()
+            trimmer = cooler.split()
+            trimmest = coolest.split()
+
+            for word in trimmer:
+                for w in trim:
+                    if (word == w):
+                        if (Link.objects.filter(links = word, story = story).count() == 0):
+                            link = Link.objects.create(links = word, story = story, path = None)
+
+            for words in trimmest:
+                for w in trim:
+                    if (words == w):
+                        if (Link.objects.filter(links = words, story = story).count() == 0):
+                            link = Link.objects.create(links = words, story = story, path = None)
+
             return HttpResponseRedirect('/dashboard/')
     else:
         form = HighlightForm()
@@ -67,11 +270,32 @@ def highlightw(request, id):
         form = HighlightForm(request.POST)
         if form.is_valid():
             high = form.cleaned_data['highlight']
-            story = Share.objects.get(id = id)
+            tag = form.cleaned_data['tag']
+            story = Share.objects.filter(user = request.user, publish = False).order_by('-pk')[0]
             story.publish = True
-            light = Highlight.objects.create(user = request.user, highlights = high, story = story)
+            light = Highlight.objects.create(user = request.user, highlights = high, tags = tag, story = story)
             light.save()
             story.save()
+
+            cool = str(light.highlights)
+            cooler = str(story.paragraph)
+            coolest = str(story.title)
+            trim = cool.split()
+            trimmer = cooler.split()
+            trimmest = coolest.split()
+
+            for word in trimmer:
+                for w in trim:
+                    if (word == w):
+                        if (Link.objects.filter(links = word, story = story).count() == 0):
+                            link = Link.objects.create(links = word, story = story, path = None)
+
+            for words in trimmest:
+                for w in trim:
+                    if (words == w):
+                        if (Link.objects.filter(links = words, story = story).count() == 0):
+                            link = Link.objects.create(links = words, story = story, path = None)
+
             return HttpResponseRedirect('/dashboard/')
     else:
         form = HighlightForm()
@@ -100,7 +324,6 @@ def next(request):
             heapq.heappush(heap_large, (word, total_large))
     
         sortme = sorted(heap, key=lambda x: x[1])
-
         sortme_large = sorted(heap_large, key=lambda x: x[1])
 
         if not request.user.is_authenticated():
@@ -133,7 +356,6 @@ def nextw(request, id):
             heapq.heappush(heap_large, (word, total_large))
     
         sortme = sorted(heap, key=lambda x: x[1])
-
         sortme_large = sorted(heap_large, key=lambda x: x[1])
 
         if not request.user.is_authenticated():
