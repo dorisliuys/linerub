@@ -14,21 +14,25 @@
       <div class="span3">
         <p class="pubdate">{{s.date}}, by <a class="linkme" href="/profile/{{s.user.username}}">{{s.user.username}}</a></p>
       </div>
-      <p class="pub"><a class="linkme" href="/exchange/">exchange again</a> &nbsp;<a class="linkme">follow</a></p>
+      <p class="pub"><a class="linkone" id="linkone{{s.id}}">connect</a><a class="linkthree" id="linkthree{{s.id}}">link</a><a class="linktwo" id="linktwo{{s.id}}">viewmode</a><a class="followme">follow</a><a class="followme" href="/exchange/">like</a><a class="linkme" href="/exchange/">exchange again</a></p>
     </div>
     <div class="nextObjectW">
-      <div class="containme">
-        {% for l in links %}
-          {% if l.story.id == s.id %}
-            {% if l.path != "" %}
-              <img class="photo" id="photo{{l.links}}" src="/media/{{l.path}}">
-            {% else %}
-              <img class="photo" style="display:none;" id="photo{{l.links}}" src="/media/{{l.path}}">
-            {% endif %}
-          {% endif %}
-        {% endfor %}
+      <div class="containme" id="containme{{s.id}}">
+        <div class="row">
+          <div class="span6">
+            {% for l in links %}
+              {% if l.story.id == s.id %}
+                {% if l.path != "" %}
+                  <img class="photo" id="photo{{l.links}}" src="/media/{{l.path}}">
+                {% else %}
+                  <img class="photoNone" id="photo{{l.links}}" src="/media/{{l.path}}">
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div><br>
+        </div>
       </div>
-      <div class="textpart" id="linkme{{s.id}}">
+      <div class="textpart">
       <center style="margin-bottom:20px;">
       {% for w, i, x in snippet %}
         {% if x == s.id %}
@@ -103,52 +107,248 @@
       $(this).find(".textpart").css("color", "#" + colors[randomColor]);
       $(this).find(".linkme").css("border-color", "#" + colors[randomColor]);
       $(this).find(".linkme").css("color", "#" + colors[randomColor]);
+      $(this).find(".followme").css("border-color", "#" + colors[randomColor]);
+      $(this).find(".followme").css("color", "#" + colors[randomColor]);
+      if (colors[randomColor] == "3a5795") {
+          $(this).find(".linkone").addClass("initBlue");
+          $(this).find(".linktwo").addClass("initBlue");
+          $(this).find(".linkthree").addClass("initBlue");
+      }
+      if (colors[randomColor] == "279a29") {
+          $(this).find(".linkone").addClass("initGreen");
+          $(this).find(".linktwo").addClass("initGreen");
+          $(this).find(".linkthree").addClass("initGreen");
+      }
+      if (colors[randomColor] == "783a95") {
+          $(this).find(".linkone").addClass("initPurple");
+          $(this).find(".linktwo").addClass("initPurple");
+          $(this).find(".linkthree").addClass("initPurple");
+      }
+      if (colors[randomColor] == "dd3b38") {
+          $(this).find(".linkone").addClass("initRed");
+          $(this).find(".linktwo").addClass("initRed");
+          $(this).find(".linkthree").addClass("initRed");
+      }
       randomColor = (randomColor + 1) % colors.length;
-  });
-
-  $(".textpart").hover(function() {
-      if ($(this).css("color") == "rgb(58, 87, 149)") {
-          $(this).toggleClass("bluest");
+      if ($(this).find(".textpart").css("color") == "rgb(58, 87, 149)") {
+          $(this).find(".textpart").addClass("bluest");
       }
-      if ($(this).css("color") == "rgb(39, 154, 41)") {
-          $(this).toggleClass("greenist");
+      if ($(this).find(".textpart").css("color") == "rgb(39, 154, 41)") {
+          $(this).find(".textpart").addClass("greenist");
       }
-      if ($(this).css("color") == "rgb(120, 58, 149)") {
-          $(this).toggleClass("purpleist");
+      if ($(this).find(".textpart").css("color") == "rgb(120, 58, 149)") {
+          $(this).find(".textpart").addClass("purpleist");
       }
-      if ($(this).css("color") == "rgb(221, 59, 56)") {
-          $(this).toggleClass("reddist");
+      if ($(this).find(".textpart").css("color") == "rgb(221, 59, 56)") {
+          $(this).find(".textpart").addClass("reddist");
       }
   });
 
   {% for s in story %}
-    
-    $("#linkme{{s.id}}").hover(function() {
-        $(this).removeClass("linkingpics");
-        $(".formats").removeClass("linkpics");
+
+    $("#linkone{{s.id}}").click(function() {
+        $(".photo").fadeTo("fast", 0.5);
+        if ($(this).hasClass("initBlue")) {
+            $(this).removeClass("initBlue");
+            $(this).addClass("blueBackground");
+            $("#linkthree{{s.id}}").removeClass("blueBackground");
+            $("#linkthree{{s.id}}").addClass("initBlue");
+        }
+        else if ($(this).hasClass("initGreen")) {
+            $(this).removeClass("initGreen");
+            $(this).addClass("greenBackground");
+            $("#linkthree{{s.id}}").removeClass("greenBackground");
+            $("#linkthree{{s.id}}").addClass("initGreen");
+        }
+        else if ($(this).hasClass("initPurple")) {
+            $(this).removeClass("initPurple");
+            $(this).addClass("purpleBackground");
+            $("#linkthree{{s.id}}").removeClass("purpleBackground");
+            $("#linkthree{{s.id}}").addClass("initPurple");
+        }
+        else if ($(this).hasClass("initRed")) {
+            $(this).removeClass("initRed");
+            $(this).addClass("redBackground");
+            $("#linkthree{{s.id}}").removeClass("redBackground");
+            $("#linkthree{{s.id}}").addClass("initRed");
+        }
         {% for w, i in snippet %}
             if ($("#photo{{w.links}}").attr("src") != "/media/") {
                 $("#awesome{{i}}{{s.id}}").addClass("hoverpics");
+            }
+            else {
+                $("#awesome{{i}}{{s.id}}").removeClass("linkpics");
             }
         {% endfor %}
         {% for word, index in snippet_large %}
             if ($("#photo{{word.links}}").attr("src") != "/media/") {
                 $("#awesomer{{index}}{{s.id}}").addClass("hoverpics");
             }
+            else {
+                $("#awesomer{{index}}{{s.id}}").removeClass("linkpics");
+            }
+        {% endfor %}
+    });
+    
+    $("#linktwo{{s.id}}").click(function() {
+        $("#containme{{s.id}}").slideToggle("slow");
+        $(".photo").fadeTo("slow", 0.5);
+        if ($(this).hasClass("initBlue")) {
+            $(this).removeClass("initBlue");
+            $(this).addClass("blueBackground");
+        }
+        else if ($(this).hasClass("blueBackground")) {
+            $(this).removeClass("blueBackground");
+            $(this).addClass("initBlue");
+        }
+        else if ($(this).hasClass("initGreen")) {
+            $(this).removeClass("initGreen");
+            $(this).addClass("greenBackground");
+        }
+        else if ($(this).hasClass("greenBackground")) {
+            $(this).removeClass("greenBackground");
+            $(this).addClass("initGreen");
+        }
+        else if ($(this).hasClass("initPurple")) {
+            $(this).removeClass("initPurple");
+            $(this).addClass("purpleBackground");
+        }
+        else if ($(this).hasClass("purpleBackground")) {
+            $(this).removeClass("purpleBackground");
+            $(this).addClass("initPurple");
+        }
+        else if ($(this).hasClass("initRed")) {
+            $(this).removeClass("initRed");
+            $(this).addClass("redBackground");
+        }
+        else if ($(this).hasClass("redBackground")) {
+            $(this).removeClass("redBackground");
+            $(this).addClass("initRed");
+        }
+        $("#linkone{{s.id}}").fadeToggle("medium");
+        $("#linkthree{{s.id}}").fadeToggle("medium");
+        {% for w, i in snippet %}
+            if ($("#awesome{{i}}{{s.id}}").hasClass("hoverpics")) {
+                $("#awesome{{i}}{{s.id}}").removeClass("hoverpics");
+                if ($("#awesome{{i}}{{s.id}}").css("color") == "rgb(58, 87, 149)") {
+                    $("#linkone{{s.id}}").removeClass("blueBackground");
+                    $("#linkone{{s.id}}").addClass("initBlue");
+                }
+                if ($("#awesome{{i}}{{s.id}}").css("color") == "rgb(39, 154, 41)") {
+                    $("#linkone{{s.id}}").removeClass("greenBackground");
+                    $("#linkone{{s.id}}").addClass("initGreen");
+                }
+                if ($("#awesome{{i}}{{s.id}}").css("color") == "rgb(120, 58, 149)") {
+                    $("#linkone{{s.id}}").removeClass("purpleBackground");
+                    $("#linkone{{s.id}}").addClass("initPurple");
+                }
+                if ($("#awesome{{i}}{{s.id}}").css("color") == "rgb(221, 59, 56)") {
+                    $("#linkone{{s.id}}").removeClass("redBackground");
+                    $("#linkone{{s.id}}").addClass("initRed");
+                }
+            }
+            if ($("#awesome{{i}}{{s.id}}").hasClass("linkpics")) {
+                $("#awesome{{i}}{{s.id}}").removeClass("linkpics");
+                if ($("#awesome{{i}}{{s.id}}").css("color") == "rgb(58, 87, 149)") {
+                    $("#linkthree{{s.id}}").removeClass("blueBackground");
+                    $("#linkthree{{s.id}}").addClass("initBlue");
+                }
+                if ($("#awesome{{i}}{{s.id}}").css("color") == "rgb(39, 154, 41)") {
+                    $("#linkthree{{s.id}}").removeClass("greenBackground");
+                    $("#linkthree{{s.id}}").addClass("initGreen");
+                }
+                if ($("#awesome{{i}}{{s.id}}").css("color") == "rgb(120, 58, 149)") {
+                    $("#linkthree{{s.id}}").removeClass("purpleBackground");
+                    $("#linkthree{{s.id}}").addClass("initPurple");
+                }
+                if ($("#awesome{{i}}{{s.id}}").css("color") == "rgb(221, 59, 56)") {
+                    $("#linkthree{{s.id}}").removeClass("redBackground");
+                    $("#linkthree{{s.id}}").addClass("initRed");
+                }
+            }
+        {% endfor %}
+        {% for word, index in snippet_large %}
+            if ($("#awesomer{{index}}{{s.id}}").hasClass("hoverpics")) {
+                $("#awesomer{{index}}{{s.id}}").removeClass("hoverpics");
+                if ($("#awesomer{{index}}{{s.id}}").css("color") == "rgb(58, 87, 149)") {
+                    $("#linkone{{s.id}}").removeClass("blueBackground");
+                    $("#linkone{{s.id}}").addClass("initBlue");
+                }
+                if ($("#awesomer{{index}}{{s.id}}").css("color") == "rgb(39, 154, 41)") {
+                    $("#linkone{{s.id}}").removeClass("greenBackground");
+                    $("#linkone{{s.id}}").addClass("initGreen");
+                }
+                if ($("#awesomer{{index}}{{s.id}}").css("color") == "rgb(120, 58, 149)") {
+                    $("#linkone{{s.id}}").removeClass("purpleBackground");
+                    $("#linkone{{s.id}}").addClass("initPurple");
+                }
+                if ($("#awesomer{{index}}{{s.id}}").css("color") == "rgb(221, 59, 56)") {
+                    $("#linkone{{s.id}}").removeClass("redBackground");
+                    $("#linkone{{s.id}}").addClass("initRed");
+                }
+            }
+            if ($("#awesomer{{index}}{{s.id}}").hasClass("linkpics")) {
+                $("#awesomer{{index}}{{s.id}}").removeClass("linkpics");
+                if ($("#awesomer{{index}}{{s.id}}").css("color") == "rgb(58, 87, 149)") {
+                    $("#linkthree{{s.id}}").removeClass("blueBackground");
+                    $("#linkthree{{s.id}}").addClass("initBlue");
+                }
+                if ($("#awesomer{{index}}{{s.id}}").css("color") == "rgb(39, 154, 41)") {
+                    $("#linkthree{{s.id}}").removeClass("greenBackground");
+                    $("#linkthree{{s.id}}").addClass("initGreen");
+                }
+                if ($("#awesomer{{index}}{{s.id}}").css("color") == "rgb(120, 58, 149)") {
+                    $("#linkthree{{s.id}}").removeClass("purpleBackground");
+                    $("#linkthree{{s.id}}").addClass("initPurple");
+                }
+                if ($("#awesomer{{index}}{{s.id}}").css("color") == "rgb(221, 59, 56)") {
+                    $("#linkthree{{s.id}}").removeClass("redBackground");
+                    $("#linkthree{{s.id}}").addClass("initRed");
+                }
+            }
         {% endfor %}
     });
 
-    $("#linkme{{s.id}}").click(function() {
-        $(this).addClass("linkingpics");
-        $(".formats").removeClass("hoverpics");
+    $("#linkthree{{s.id}}").click(function() {
+        $(".photo").fadeTo("fast", 0.5);
+        if ($(this).hasClass("initBlue")) {
+            $(this).removeClass("initBlue");
+            $(this).addClass("blueBackground");
+            $("#linkone{{s.id}}").removeClass("blueBackground");
+            $("#linkone{{s.id}}").addClass("initBlue");
+        }
+        else if ($(this).hasClass("initGreen")) {
+            $(this).removeClass("initGreen");
+            $(this).addClass("greenBackground");
+            $("#linkone{{s.id}}").removeClass("greenBackground");
+            $("#linkone{{s.id}}").addClass("initGreen");
+        }
+        else if ($(this).hasClass("initPurple")) {
+            $(this).removeClass("initPurple");
+            $(this).addClass("purpleBackground");
+            $("#linkone{{s.id}}").removeClass("purpleBackground");
+            $("#linkone{{s.id}}").addClass("initPurple");
+        }
+        else if ($(this).hasClass("initRed")) {
+            $(this).removeClass("initRed");
+            $(this).addClass("redBackground");
+            $("#linkone{{s.id}}").removeClass("redBackground");
+            $("#linkone{{s.id}}").addClass("initRed");
+        }
         {% for w, i in snippet %}
             if ($("#photo{{w.links}}").attr("src") == "/media/") {
                 $("#awesome{{i}}{{s.id}}").addClass("linkpics");
+            }
+            else {
+                $("#awesome{{i}}{{s.id}}").removeClass("hoverpics");
             }
         {% endfor %}
         {% for word, index in snippet_large %}
             if ($("#photo{{word.links}}").attr("src") == "/media/") {
                 $("#awesomer{{index}}{{s.id}}").addClass("linkpics");
+            }
+            else {
+                $("#awesomer{{index}}{{s.id}}").removeClass("hoverpics");
             }
         {% endfor %}
     });
@@ -156,38 +356,15 @@
     {% for w, i in snippet %}
 
         $("#awesome{{i}}{{s.id}}").click(function() {
+            $(".photo").fadeTo("fast", 0.5);
             if ($("#awesome{{i}}{{s.id}}").hasClass("linkpics")) {
-                $(".formats").removeClass("hoverpics");
                 $('#myModal').fadeIn("slow");
                 $("#form_id").attr("action", "/tag/{{s.id}}/{{w.links}}/");
             }
-        });
-
-        $("#awesome{{i}}{{s.id}}").mouseover(function() {
-            if (!$("#linkme{{s.id}}").hasClass("linkingpics")) {
+            if (!$("#linkme{{s.id}}").hasClass("hoverpics")) {
                 if ($("#photo{{w.links}}").attr("src") != "/media/") {
                     $("#photo{{w.links}}").fadeTo("fast", 1);
                 }
-            }
-        });
-
-        $("#awesome{{i}}{{s.id}}").mouseout(function() {
-            if (!$("#linkme{{s.id}}").hasClass("linkingpics")) {
-                if ($("#photo{{w.links}}").attr("src") != "/media/") {
-                    $("#photo{{w.links}}").fadeTo("fast", 0.5);
-                }
-            }
-        });
-
-        $("#photo{{w.links}}").mouseover(function() {
-            if ($(this).attr("src") != "/media/") {
-                $(this).fadeTo("fast", 1);
-            }
-        });
-
-        $("#photo{{w.links}}").mouseout(function() {
-            if ($(this).attr("src") != "/media/") {
-                $(this).fadeTo("fast", 0.5);
             }
         });
 
@@ -196,35 +373,16 @@
     {% for word, index in snippet_large %}
 
         $("#awesomer{{index}}{{s.id}}").click(function() {
+            $(".photo").fadeTo("fast", 0.5);
             if ($("#awesomer{{index}}{{s.id}}").hasClass("linkpics")) {
-                $(".formats").removeClass("hoverpics");
                 $('#myModal').fadeIn("slow");
                 $("#form_id").attr("action", "/tag/{{s.id}}/{{word.links}}/");
             }
-        });
-
-        $("#awesomer{{index}}{{s.id}}").mouseover(function() {
-            if (!$("#linkme{{s.id}}").hasClass("linkingpics")) {
+            if (!$("#linkme{{s.id}}").hasClass("hoverpics")) {
                 if ($("#photo{{word.links}}").attr("src") != "/media/") {
                     $("#photo{{word.links}}").fadeTo("fast", 1);
                 }
             }
-        });
-
-        $("#awesomer{{index}}{{s.id}}").mouseout(function() {
-            if (!$("#linkme{{s.id}}").hasClass("linkingpics")) {
-                if ($("#photo{{word.links}}").attr("src") != "/media/") {
-                    $("#photo{{word.links}}").fadeTo("fast", 0.5);
-                }
-            }
-        });
-
-        $("#photo{{word.links}}").mouseover(function() {
-            $(this).fadeTo("fast", 1);
-        });
-
-        $("#photo{{word.links}}").mouseout(function() {
-            $(this).fadeTo("fast", 0.5);
         });
 
     {% endfor %}

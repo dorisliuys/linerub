@@ -16,6 +16,54 @@
   background: #FBEBEA;
 }
 
+.blueBackground {
+  border: 1px solid #3a5795;
+  background: #3a5795;
+  color: white;
+}
+
+.greenBackground {
+  border: 1px solid #279a29;
+  background: #279a29;
+  color: white;
+}
+
+.purpleBackground {
+  border: 1px solid #783a95;
+  background: #783a95;
+  color: white;
+}
+
+.redBackground {
+  border: 1px solid #dd3b38;
+  background: #dd3b38;
+  color: white;
+}
+
+.initBlue {
+  border: 1px solid #3a5795;
+  background: white;
+  color: #3a5795;
+}
+
+.initGreen {
+  border: 1px solid #279a29;
+  background: white;
+  color: #279a29;
+}
+
+.initPurple {
+  border: 1px solid #783a95;
+  background: white;
+  color: #783a95;
+}
+
+.initRed {
+  border: 1px solid #dd3b38;
+  background: white;
+  color: #dd3b38;
+}
+
 .lightup {
   background: black;
   color: white;
@@ -27,6 +75,15 @@
   margin-left: 2px;
   opacity: 0.5;
   border: 1px solid black;
+}
+
+.photoNone {
+  height: 50px;
+  width: auto;
+  margin-left: 2px;
+  opacity: 0.5;
+  border: 1px solid black;
+  display: none;
 }
 
 .createStory {
@@ -206,6 +263,49 @@
     opacity: 1;
   }
 
+.linkone {
+  margin-right: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: none;
+}
+
+.linktwo {
+  margin-right: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.linkthree {
+  margin-right: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: none;
+}
+
+.followme {
+  border: 1px solid black;
+  margin-right: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .hoverpics {
   background: white;
   cursor: pointer;
@@ -249,6 +349,7 @@
   padding-left: 3px;
   border-bottom: 1px solid black;
   height: 50px;
+  display: none;
 }
 
 .textpart {
